@@ -26,13 +26,23 @@ class ViewController: UIViewController {
     }
 
     @IBAction func operate(sender: UIButton) {
+        if userIsTyping {
+            enter()
+        }
         let operation = sender.currentTitle!
         switch operation {
-        case "×":
-        case "÷":
-        case "+": 
-        case "−":
-            default: break
+        case "×": performOperation({(op1: Double, op2: Double) -> Double in return op1 * op2})
+        case "÷": performOperation({(op1: Double, op2: Double) -> Double in return op1 / op2})
+        case "+": performOperation({(op1: Double, op2: Double) -> Double in return op1 + op2})
+        case "−": performOperation({(op1: Double, op2: Double) -> Double in return op1 - op2})
+        default: break
+        }
+    }
+    
+    func performOperation(operation: (Double,Double) -> Double) {
+        if operandStack.count >= 2 {
+            displayValue = operation(operandStack.removeLast(), operandStack .removeLast())
+            enter()
         }
     }
 
