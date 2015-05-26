@@ -31,10 +31,11 @@ class ViewController: UIViewController {
         }
         let operation = sender.currentTitle!
         switch operation {
-        case "×": performOperation({(op1: Double, op2: Double) -> Double in return op1 * op2})
-        case "÷": performOperation({(op1: Double, op2: Double) -> Double in return op1 / op2})
-        case "+": performOperation({(op1: Double, op2: Double) -> Double in return op1 + op2})
-        case "−": performOperation({(op1: Double, op2: Double) -> Double in return op1 - op2})
+        case "×": performOperation {$0 * $1} 
+        case "÷": performOperation {$0 / $1}
+        case "+": performOperation {$0 + $1}
+        case "−": performOperation {$0 - $1}
+//        case "√": performOperation {sqrt($0)}
         default: break
         }
     }
@@ -45,8 +46,14 @@ class ViewController: UIViewController {
             enter()
         }
     }
-
     
+//    func performOperation(operation: Double -> Double) {
+//        if operandStack.count >= 1 {
+//            displayValue = operation(operandStack .removeLast())
+//            enter()
+//        }
+//    }
+//    
     var operandStack = Array<Double>()
     @IBAction func enter() {
         userIsTyping = false;
