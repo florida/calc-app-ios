@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         case "÷": performOperation {$0 / $1}
         case "+": performOperation {$0 + $1}
         case "−": performOperation {$0 - $1}
-//        case "√": performOperation {sqrt($0)}
+        case "√": performSingleOperation {sqrt($0)}
         default: break
         }
     }
@@ -47,13 +47,13 @@ class ViewController: UIViewController {
         }
     }
     
-//    func performOperation(operation: Double -> Double) {
-//        if operandStack.count >= 1 {
-//            displayValue = operation(operandStack .removeLast())
-//            enter()
-//        }
-//    }
-//    
+    func performSingleOperation(operation: Double -> Double) {
+        if operandStack.count >= 1 {
+            displayValue = operation(operandStack .removeLast())
+            enter()
+        }
+    }
+    
     var operandStack = Array<Double>()
     @IBAction func enter() {
         userIsTyping = false;
